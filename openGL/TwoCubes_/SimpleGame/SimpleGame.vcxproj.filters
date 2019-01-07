@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\Shaders">
+      <UniqueIdentifier>{aa86e47f-445f-4440-9a76-173363b46c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Function">
+      <UniqueIdentifier>{b1b9f5ea-cd5d-44bf-836d-6ed0d64f0255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Defines">
+      <UniqueIdentifier>{cf1005be-993b-4c49-9f2d-1362ed6469db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectMgr">
+      <UniqueIdentifier>{8daaa1f7-ba87-491e-ab57-979640f19438}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="교수님코드">
+      <UniqueIdentifier>{749f129a-dae3-4970-b80d-1f9a02fe5ec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneMgr_이전까지작업물">
+      <UniqueIdentifier>{a61671aa-af12-4c43-9ffc-b339782b279f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>SceneMgr_이전까지작업물</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadPng.h">
+      <Filter>교수님코드</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectMgr.h">
+      <Filter>ObjectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>교수님코드</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialPort.h">
+      <Filter>SceneMgr_이전까지작업물</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Function.cpp">
+      <Filter>Function</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>SceneMgr_이전까지작업물</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadPng.cpp">
+      <Filter>교수님코드</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Defines</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectMgr.cpp">
+      <Filter>ObjectMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>교수님코드</Filter>
+    </ClCompile>
+    <ClCompile Include="SerialPort.cpp">
+      <Filter>SceneMgr_이전까지작업물</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\SolidRect.fs">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+    <None Include="Shaders\SolidRect.vs">
+      <Filter>소스 파일\Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
