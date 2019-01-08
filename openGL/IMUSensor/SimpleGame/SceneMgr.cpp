@@ -46,9 +46,9 @@ void SceneMgr::SaveResetNode() {
 	reset_buffer.euler_z = -sp.parsedata.euler_z;
 
 
-	reset_buffer.acc_x = -sp.parsedata.acc_x;
-	reset_buffer.acc_y = -sp.parsedata.acc_y;
-	reset_buffer.acc_z = -sp.parsedata.acc_z;
+	//reset_buffer.acc_x = -sp.parsedata.acc_x;
+	//reset_buffer.acc_y = -sp.parsedata.acc_y;
+	//reset_buffer.acc_z = -sp.parsedata.acc_z;
 
 	reset_graph_pos = true;
 }
@@ -68,9 +68,9 @@ void SceneMgr::ReadDataAll(vector<ParseNode>& input_buffer) {
 		buffer.euler_x = sp.parsedata.euler_x;
 		buffer.euler_y = sp.parsedata.euler_y;
 		buffer.euler_z = sp.parsedata.euler_z;
-		buffer.gyro_x = sp.parsedata.gyro_x;
-		buffer.gyro_y = sp.parsedata.gyro_y;
-		buffer.gyro_z = sp.parsedata.gyro_z;
+		//buffer.gyro_x = sp.parsedata.gyro_x;
+		//buffer.gyro_y = sp.parsedata.gyro_y;
+		//buffer.gyro_z = sp.parsedata.gyro_z;
 		buffer.battery = sp.parsedata.battery;
 		input_buffer.push_back(buffer);
 
@@ -372,9 +372,9 @@ void SceneMgr::DrawEulerData(float elapsed_time) {
 }
 
 void SceneMgr::DrawGyroData(float elapsed_time) {
-	pure_angle_x = pure_angle_x + (sp.parsedata.gyro_x + reset_buffer.gyro_x) * elapsed_time;
-	pure_angle_y = pure_angle_y + (sp.parsedata.gyro_y + reset_buffer.gyro_y) * elapsed_time;
-	pure_angle_z = pure_angle_z + (sp.parsedata.gyro_z + reset_buffer.gyro_z) * elapsed_time;
+	//pure_angle_x = pure_angle_x + (sp.parsedata.gyro_x + reset_buffer.gyro_x) * elapsed_time;
+	//pure_angle_y = pure_angle_y + (sp.parsedata.gyro_y + reset_buffer.gyro_y) * elapsed_time;
+	//pure_angle_z = pure_angle_z + (sp.parsedata.gyro_z + reset_buffer.gyro_z) * elapsed_time;
 
 
 	// 각속도의 단위는 degree / sec 이다. 
@@ -399,9 +399,9 @@ void SceneMgr::CopyData(vector<ParseNode>& input_buffer)
 	for (auto d : render_buffer)
 	{
 		//다 집어 넣은 뒤에 
-		gyro_x.push_back(d.gyro_x);
-		gyro_y.push_back(d.gyro_y);
-		gyro_z.push_back(d.gyro_z);
+		//gyro_x.push_back(d.gyro_x);
+		//gyro_y.push_back(d.gyro_y);
+		//gyro_z.push_back(d.gyro_z);
 	}
 }
 
@@ -450,9 +450,7 @@ void SceneMgr::MeanData(vector<float>& v, int parse_option, float elapsed_time)
 	//v벡터를 비워줍니다.
 	v.clear();
 }
-//PullData 함수를 사용하는 과정에서 오류가 있습니다. ㅠㅠ
-//새로운 데이터를 추가한 뒤에 앞으로 한칸씩 미는 형태인데, 
-//지워지는 속도가 점점 더 빨라져 결국 vector<INFO> M 사이즈가 0이 되어버립니다.
+
 void SceneMgr::PullData(vector<INFO>& M)
 {	
 	int count = 0;
@@ -470,61 +468,71 @@ void SceneMgr::PullData(vector<INFO>& M)
 void SceneMgr::DrawCube() {
 	// Matrix Update
 	// 이동 * 회전 * 크기 * Vector 순으로 
-	int mov_x = 0;
-	int mov_y = 0;
-	int mov_z = 0;
-	int scale_x = 1;
-	int scale_y = 1;
-	int scale_z = 1;
-	int rot_x = 0;
-	int rot_y = 0;
-	int rot_z = 0;
+	//int mov_x = 0;
+	//int mov_y = 0;
+	//int mov_z = 0;
+	//int scale_x = 1;
+	//int scale_y = 1;
+	//int scale_z = 1;
+	//int rot_x = 0;
+	//int rot_y = 0;
+	//int rot_z = 0;
 
-	glm::mat4 rotate_matrix_x{
-		glm::vec4{ 1,0,0,0 },
-		glm::vec4{ 0,cos(rot_x),-sin(rot_x),0 },
-		glm::vec4{ 0,sin(rot_x),cos(rot_x),0 },
-		glm::vec4{ 0,0,0,1 } };
+	//glm::mat4 rotate_matrix_x{
+	//	glm::vec4{ 1,0,0,0 },
+	//	glm::vec4{ 0,cos(rot_x),-sin(rot_x),0 },
+	//	glm::vec4{ 0,sin(rot_x),cos(rot_x),0 },
+	//	glm::vec4{ 0,0,0,1 } };
 
-	glm::mat4 rotate_matrix_y{
-		glm::vec4{ cos(rot_y),0,sin(rot_y),0 },
-		glm::vec4{ 0,1,0,0 },
-		glm::vec4{ -sin(rot_y),0,cos(rot_y),0 },
-		glm::vec4{ 0,0,0,1 } };
+	//glm::mat4 rotate_matrix_y{
+	//	glm::vec4{ cos(rot_y),0,sin(rot_y),0 },
+	//	glm::vec4{ 0,1,0,0 },
+	//	glm::vec4{ -sin(rot_y),0,cos(rot_y),0 },
+	//	glm::vec4{ 0,0,0,1 } };
 
-	glm::mat4 rotate_matrix_z{
-		glm::vec4{ cos(rot_z),-sin(rot_z),0,0 },
-		glm::vec4{ sin(rot_z),cos(rot_z),0,0 },
-		glm::vec4{ 0,0,1,0 },
-		glm::vec4{ 0,0,0,1 } };
+	//glm::mat4 rotate_matrix_z{
+	//	glm::vec4{ cos(rot_z),-sin(rot_z),0,0 },
+	//	glm::vec4{ sin(rot_z),cos(rot_z),0,0 },
+	//	glm::vec4{ 0,0,1,0 },
+	//	glm::vec4{ 0,0,0,1 } };
 
-	rotate_matrix = rotate_matrix_x * rotate_matrix_y * rotate_matrix_z;
+	//rotate_matrix = rotate_matrix_x * rotate_matrix_y * rotate_matrix_z;
 
-	moving_matrix = {
-		glm::vec4{ 1,0,0,mov_x },
-		glm::vec4{ 0,1,0,mov_y },
-		glm::vec4{ 0,0,1,mov_z },
-		glm::vec4{ 0,0,0,1 } };
+	//moving_matrix = {
+	//	glm::vec4{ 1,0,0,mov_x },
+	//	glm::vec4{ 0,1,0,mov_y },
+	//	glm::vec4{ 0,0,1,mov_z },
+	//	glm::vec4{ 0,0,0,1 } };
 
-	scaling_matrix = {
-		glm::vec4{ scale_x,0,0,0 },
-		glm::vec4{ 0,scale_y,0,0 },
-		glm::vec4{ 0,0,scale_z,0 },
-		glm::vec4{ 0,0,0,1 }
-	};
+	//scaling_matrix = {
+	//	glm::vec4{ scale_x,0,0,0 },
+	//	glm::vec4{ 0,scale_y,0,0 },
+	//	glm::vec4{ 0,0,scale_z,0 },
+	//	glm::vec4{ 0,0,0,1 }
+	//};
 
 
-	transforming_matrix = moving_matrix * rotate_matrix * scaling_matrix;
+	//transforming_matrix = moving_matrix * rotate_matrix * scaling_matrix;
 
 	g_Renderer->DrawSolidCube(0.f, 0.f, 0.f,
 		0.f, 0.f, 0.f, SIZE_OF_CUBE);
 	// 동적인 큐브 
-	g_Renderer->DrawSolidCube(
+	/*g_Renderer->DrawSolidCube(
 		BETWEEN_LENGTH * sin(sp.parsedata.euler_y / 180.f * 3.141592),
 		BETWEEN_LENGTH * cos(sp.parsedata.euler_y / 180.f * 3.141592),
 		0.f,
 		0.f,
 		0.f,
 		-sp.parsedata.euler_y / 180.f * 3.141592,
+		SIZE_OF_CUBE);*/
+
+	g_Renderer->DrawSolidCube(
+		sp.parsedata.distance_x *10 ,
+		sp.parsedata.distance_y *10,
+		sp.parsedata.distance_z *10,
+		-sp.parsedata.euler_x / 180.f * PI,
+		-sp.parsedata.euler_y / 180.f * PI,
+		-sp.parsedata.euler_z / 180.f * PI,
 		SIZE_OF_CUBE);
+
 }

@@ -62,20 +62,31 @@ void SerialPort::Parsing(string& buffer) {
 			parsedata.euler_y = (float)atof(token.c_str());
 		else if (parse_count == 3)
 			parsedata.euler_z = (float)atof(token.c_str());
-		else if (parse_count == 4)
+
+		/*else if (parse_count == 4)
 			parsedata.gyro_x = (float)atof(token.c_str());
 		else if (parse_count == 5)
 			parsedata.gyro_y = (float)atof(token.c_str());
 		else if (parse_count == 6)
 			parsedata.gyro_z = (float)atof(token.c_str());
+
 		else if (parse_count == 7)
 			parsedata.acc_x = (float)atof(token.c_str());
 		else if (parse_count == 8)
 			parsedata.acc_y = (float)atof(token.c_str());
-		else if (parse_count == 9) {
-			parsedata.acc_z = (float)atof(token.c_str());
+		else if (parse_count == 9) 
+			parsedata.acc_z = (float)atof(token.c_str());*/
+
+		else if (parse_count == 4)
+			parsedata.distance_x = (float)atof(token.c_str());
+		else if (parse_count == 5) 
+			parsedata.distance_y = (float)atof(token.c_str());
+		else if (parse_count == 6) {
+			parsedata.distance_z = (float)atof(token.c_str());
 			parse_count = -1;
+			cout << parsedata.distance_x <<"\t"<< parsedata.distance_y <<"\t"<< parsedata.distance_z << "\n";
 		}
+
 		parse_count++;
 		buffer.erase(0, pos + delimiter.length());
 	}

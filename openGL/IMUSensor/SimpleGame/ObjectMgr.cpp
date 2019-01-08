@@ -3,7 +3,7 @@
 
 ObjectMgr::ObjectMgr()
 {
-	// 고정된 큐브의 좌표 (정말 고정되서 안움직임.)
+	// 고정된 큐브의 좌표 (정말 고정되어 안움직임.)
 	fixed_cube.x = 0.f;
 	fixed_cube.y = 0.f;
 	fixed_cube.z = 0.f;
@@ -26,14 +26,12 @@ ObjectMgr::ObjectMgr()
 
 void ObjectMgr::DrawCube() {
 	// 고정된 큐브
-
 	renderer_obj->DrawSolidCube(fixed_cube.x, fixed_cube.y, fixed_cube.z,
 		0.f, 0.f, 0.f, SIZE_OF_CUBE);
-	// 동적인 큐브 
-	renderer_obj->DrawSolidCube(BETWEEN_LENGTH * sin(theta), BETWEEN_LENGTH * cos(theta), dynamic_cube.z,
-		0.f, 0.f, -theta, SIZE_OF_CUBE);
 
-	
+	// 동적인 큐브 
+	//renderer_obj->DrawSolidCube(BETWEEN_LENGTH * sin(theta), BETWEEN_LENGTH * cos(theta), dynamic_cube.z,
+	//	0.f, 0.f, -theta, SIZE_OF_CUBE);
 }
 
 void ObjectMgr::MoveTick() {

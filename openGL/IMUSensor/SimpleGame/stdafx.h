@@ -41,7 +41,6 @@ struct MyMatrix {
 #define BETWEEN_LENGTH	100.f
 #define SIZE_OF_CUBE	50.f
 #define RADIAN			180.f / 3.141592
-
 //-------------------------------------------------------------------------------
 
 
@@ -77,12 +76,15 @@ typedef struct ParseNode {		//센서에서 받는 정보들
 	float euler_x;
 	float euler_y;
 	float euler_z;
-	float gyro_x;
-	float gyro_y;
-	float gyro_z;
-	float acc_x;
-	float acc_y;
-	float acc_z;
+	//float gyro_x;
+	//float gyro_y;
+	//float gyro_z;
+	//float acc_x;
+	//float acc_y;
+	//float acc_z;
+	float distance_x;
+	float distance_y;
+	float distance_z;
 
 	int battery;
 } ParseNode;
