@@ -65,6 +65,10 @@ void SceneMgr::ReadDataAll(vector<ParseNode>& input_buffer) {
 	if (sp.parsedata.str_id == sp.filter_sensor_id) {
 		ParseNode buffer;
 		buffer.str_id = sp.parsedata.str_id;
+		buffer.distance_x = sp.parsedata.distance_x;
+		buffer.distance_y = sp.parsedata.distance_y;
+		buffer.distance_z = sp.parsedata.distance_z;
+
 		buffer.euler_x = sp.parsedata.euler_x;
 		buffer.euler_y = sp.parsedata.euler_y;
 		buffer.euler_z = sp.parsedata.euler_z;
@@ -515,7 +519,7 @@ void SceneMgr::DrawCube() {
 	//transforming_matrix = moving_matrix * rotate_matrix * scaling_matrix;
 
 	g_Renderer->DrawSolidCube(0.f, 0.f, 0.f,
-		0.f, 0.f, 0.f, SIZE_OF_CUBE);
+		0.f, 0.f, 0.f, SIZE_OF_CUBE*0.1);
 	// 동적인 큐브 
 	/*g_Renderer->DrawSolidCube(
 		BETWEEN_LENGTH * sin(sp.parsedata.euler_y / 180.f * 3.141592),
@@ -527,9 +531,9 @@ void SceneMgr::DrawCube() {
 		SIZE_OF_CUBE);*/
 
 	g_Renderer->DrawSolidCube(
-		sp.parsedata.distance_x *10 ,
-		sp.parsedata.distance_y *10,
-		sp.parsedata.distance_z *10,
+		sp.parsedata.distance_x  ,
+		sp.parsedata.distance_y ,
+		sp.parsedata.distance_z ,
 		-sp.parsedata.euler_x / 180.f * PI,
 		-sp.parsedata.euler_y / 180.f * PI,
 		-sp.parsedata.euler_z / 180.f * PI,

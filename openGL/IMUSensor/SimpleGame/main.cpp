@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 	}
 
 	g_SceneMgr = new SceneMgr;
-	g_SceneMgr->SetupSerialPort("100-3", "COM4");
+	g_SceneMgr->SetupSerialPort("100-1", "COM5");
 
 	thread read_thread{ ThreadRead };
 
