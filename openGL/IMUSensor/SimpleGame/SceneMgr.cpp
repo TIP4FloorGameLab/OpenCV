@@ -69,9 +69,9 @@ void SceneMgr::ReadDataAll(vector<ParseNode>& input_buffer) {
 		buffer.distance_y = sp.parsedata.distance_y;
 		buffer.distance_z = sp.parsedata.distance_z;
 
-		buffer.euler_x = sp.parsedata.euler_x;
-		buffer.euler_y = sp.parsedata.euler_y;
-		buffer.euler_z = sp.parsedata.euler_z;
+		//buffer.euler_x = sp.parsedata.euler_x;
+		//buffer.euler_y = sp.parsedata.euler_y;
+		//buffer.euler_z = sp.parsedata.euler_z;
 		//buffer.gyro_x = sp.parsedata.gyro_x;
 		//buffer.gyro_y = sp.parsedata.gyro_y;
 		//buffer.gyro_z = sp.parsedata.gyro_z;
@@ -80,9 +80,9 @@ void SceneMgr::ReadDataAll(vector<ParseNode>& input_buffer) {
 
 		if (!isInit)
 		{
-			pre_AM[0] = pre_GM[0] = pre_HM[0] = pre_MM[0] = pre_LM[0] = pre_QM[0] = pre_IM[0] = sp.parsedata.euler_x;
-			pre_AM[1] = pre_GM[1] = pre_HM[1] = pre_MM[1] = pre_LM[1] = pre_QM[1] = pre_IM[1] = sp.parsedata.euler_y;
-			pre_AM[2] = pre_GM[2] = pre_HM[2] = pre_MM[2] = pre_LM[2] = pre_QM[2] = pre_IM[2] = sp.parsedata.euler_z;
+			pre_AM[0] = pre_GM[0] = pre_HM[0] = pre_MM[0] = pre_LM[0] = pre_QM[0] = pre_IM[0] = sp.parsedata.distance_x;
+			pre_AM[1] = pre_GM[1] = pre_HM[1] = pre_MM[1] = pre_LM[1] = pre_QM[1] = pre_IM[1] = sp.parsedata.distance_y;
+			pre_AM[2] = pre_GM[2] = pre_HM[2] = pre_MM[2] = pre_LM[2] = pre_QM[2] = pre_IM[2] = sp.parsedata.distance_z;
 			isInit = true;
 		}
 	}
@@ -530,13 +530,26 @@ void SceneMgr::DrawCube() {
 		-sp.parsedata.euler_y / 180.f * 3.141592,
 		SIZE_OF_CUBE);*/
 
+	//g_Renderer->DrawSolidCube(
+	//	sp.parsedata.distance_x  ,
+	//	sp.parsedata.distance_y ,
+	//	sp.parsedata.distance_z ,
+	//	-sp.parsedata.euler_x / 180.f * PI,
+	//	-sp.parsedata.euler_y / 180.f * PI,
+	//	-sp.parsedata.euler_z / 180.f * PI,
+	//	SIZE_OF_CUBE);
+
+
 	g_Renderer->DrawSolidCube(
-		sp.parsedata.distance_x  ,
-		sp.parsedata.distance_y ,
-		sp.parsedata.distance_z ,
-		-sp.parsedata.euler_x / 180.f * PI,
-		-sp.parsedata.euler_y / 180.f * PI,
-		-sp.parsedata.euler_z / 180.f * PI,
+		sp.parsedata.distance_x*10,
+		sp.parsedata.distance_y * 10,
+		sp.parsedata.distance_z * 10,
+		0,
+		0,
+		0,
 		SIZE_OF_CUBE);
+
+
+
 
 }

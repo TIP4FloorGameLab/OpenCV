@@ -96,7 +96,17 @@ int main(int argc, char **argv)
 	}
 
 	g_SceneMgr = new SceneMgr;
-	g_SceneMgr->SetupSerialPort("100-1", "COM5");
+
+
+	string str_SensorID;
+	string str_COMPort;
+
+	std::cout << "Insert Sensor ID (ex> 100-1) :"; 
+	std::cin >> str_SensorID;
+	std::cout << "Insert COM Port (ex> COM5) :";
+	std::cin >> str_COMPort;
+
+	g_SceneMgr->SetupSerialPort(str_SensorID.data(), str_COMPort.data());
 
 	thread read_thread{ ThreadRead };
 
