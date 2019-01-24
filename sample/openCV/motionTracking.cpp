@@ -19,6 +19,7 @@
 #include <opencv/highgui.h>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/core/core.hpp>
+#include <opencv2/core/mat.hpp>
 
 using namespace std;
 using namespace cv;
@@ -45,12 +46,13 @@ void searchForMovement(Mat thresholdImage, Mat &cameraFeed) {
 
 	vector< vector<Point> > contours;
 	vector<Vec4i> hierarchy;
-	//find contours of filtered image using openCV findContours function
-	findContours(temp, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);// retrieves all contours
-	findContours(temp, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);// retrieves external contours
+
+	findContours(temp, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
+	findContours(temp, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 
 	if (contours.size() > 0)objectDetected = true;
 	else objectDetected = false;
+	int x{ 0 }, y{ 0 };
 
 	if (objectDetected) {
 		vector< vector<Point> > largestContourVec;
@@ -61,16 +63,39 @@ void searchForMovement(Mat thresholdImage, Mat &cameraFeed) {
 		int ypos = objectBoundingRectangle.y + objectBoundingRectangle.height / 2;
 
 		theObject[0] = xpos, theObject[1] = ypos;
-	}
-	int x = theObject[0];
-	int y = theObject[1];
 
-	circle(cameraFeed, Point(x, y), 20, Scalar(0, 255, 0), 2);
-	line(cameraFeed, Point(x, y), Point(x, y - 25), Scalar(0, 255, 0), 2);
-	line(cameraFeed, Point(x, y), Point(x, y + 25), Scalar(0, 255, 0), 2);
-	line(cameraFeed, Point(x, y), Point(x - 25, y), Scalar(0, 255, 0), 2);
-	line(cameraFeed, Point(x, y), Point(x + 25, y), Scalar(0, 255, 0), 2);
+		x = theObject[0];
+		y = theObject[1];
+
+		//ROI 설정 ( y기준 )
+		Rect rect(0, y - 25, cameraFeed.size().width, 70);
+		rectangle(cameraFeed, rect, Scalar(255, 0, 0),2);
+		// ROI 복제 
+		Mat ROI = cameraFeed.clone();
+
+		// ROI 크롭
+		ROI = ROI.rowRange(rect.y, rect.y + 70);
+
+		// show
+		imshow("ROI", ROI);
+	}
+
+
+	circle(cameraFeed, Point(x, y), 20, Scalar(0, 255, 0), 1);
+	line(cameraFeed, Point(x, y), Point(x, y - 25), Scalar(0, 255, 0), 1);
+	line(cameraFeed, Point(x, y), Point(x, y + 25), Scalar(0, 255, 0), 1);
+	line(cameraFeed, Point(x, y), Point(x - 25, y), Scalar(0, 255, 0), 1);
+	line(cameraFeed, Point(x, y), Point(x + 25, y), Scalar(0, 255, 0), 1);
 	putText(cameraFeed, "Tracking object at (" + intToString(x) + "," + intToString(y) + ")", Point(x, y), 1, 1, Scalar(255, 0, 0), 2);
+
+
+
+}
+
+void DrawROI()
+{
+	//Mat imageROI;
+	//imageROI = capture()
 }
 
 int main() {
@@ -88,16 +113,15 @@ int main() {
 	VideoCapture capture;
 
 	//---캠으로 할 때----
-	bool update_bg_model = true;
+	//bool update_bg_model = true;
 
-	int deviceID = 0;					   // 0 = open default camera
-	int apiID = cv::CAP_ANY;      // 0 = autodetect default API
+	//int deviceID = 0;					   // 0 = open default camera
+	//int apiID = cv::CAP_ANY;      // 0 = autodetect default API
 
-	capture.open(deviceID + apiID);
-	
+	//capture.open(deviceID + apiID);
+	//
 	//---비디오로 할 때---
-	//	capture.open("../video/video.mp4");
-
+		capture.open("../video/video.mp4");
 	if (!capture.isOpened()) {
 		cout << "ERROR ACQUIRING VIDEO FEED\n";
 		return -1;
@@ -105,10 +129,11 @@ int main() {
 
 
 	while (1) {
-		while(true){
+		//---캠으로 할 때----
+		//while(true){
 		//---비디오로 할 때---
-		//while (capture.get(cv::CAP_PROP_POS_FRAMES) < capture.get(cv::CAP_PROP_FRAME_COUNT) - 1) {
-
+		while (capture.get(cv::CAP_PROP_POS_FRAMES) < capture.get(cv::CAP_PROP_FRAME_COUNT) - 1) {
+			
 			capture.read(frame1);
 			cv::cvtColor(frame1, grayImage1, COLOR_BGR2GRAY);
 
@@ -140,8 +165,13 @@ int main() {
 				searchForMovement(thresholdImage, frame1);
 			}
 
+
+
 			imshow("Frame1", frame1);
 
+
+			///------------------------------------------
+	
 			switch (waitKey(10)) {
 
 			case 27: //'esc' key has been pressed, exit program.
@@ -175,6 +205,8 @@ int main() {
 		capture.release();
 	}
 
+
 	return 0;
 
 }
+
