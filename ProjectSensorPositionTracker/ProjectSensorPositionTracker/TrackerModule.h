@@ -4,12 +4,14 @@ class CTrackerModule
 public:
 	CTrackerModule();
 	~CTrackerModule();
-	bool Initialize(cv::VideoCapture* _video);
-	bool TrackObject();
+	bool Initialize(cv::VideoCapture& _video);
+	bool TrackObject(const Mat& img, Mat& mask, Mat& dst, Mat& result);
 private:
-	cv::Ptr<cv::TrackerKCF> tracker;
 	cv::Mat m_mat;
-	// Define initial bounding box 
-	cv::Rect2d m_bbox;
+	
+	Ptr<BackgroundSubtractorMOG2> bgsubtractor;
+	bool update_bg_model;
+
+
 };
 

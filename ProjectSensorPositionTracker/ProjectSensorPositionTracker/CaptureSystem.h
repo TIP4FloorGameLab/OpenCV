@@ -11,9 +11,9 @@ public:
 	CCaptureSystem();
 	CCaptureSystem(CAPTUREMODE _capturemode);
 	~CCaptureSystem();
-	cv::VideoCapture* GetCaptureData() { return m_MainCapture; }
+	cv::VideoCapture& GetCaptureData() { return m_MainCapture; }
 private:
-	cv::VideoCapture* m_MainCapture;
+	cv::VideoCapture m_MainCapture;
 	
 };
 

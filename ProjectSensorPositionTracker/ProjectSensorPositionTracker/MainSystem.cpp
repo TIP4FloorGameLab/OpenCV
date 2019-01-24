@@ -7,9 +7,9 @@
 
 CMainSystem::CMainSystem()
 {
-	m_CaptureSystem = std::make_shared<CCaptureSystem>(CAPTUREMODE::CAPTUREMODE_CAM);
-	m_BufferManager = std::make_shared<CBufferManager>();
-	m_TrackerModule = std::make_shared<CTrackerModule>();
+	m_CaptureSystem = new CCaptureSystem(CAPTUREMODE::CAPTUREMODE_CAM);
+	m_BufferManager = new CBufferManager();
+	m_TrackerModule = new CTrackerModule();
 }
 
 
@@ -19,40 +19,43 @@ CMainSystem::~CMainSystem()
 
 void CMainSystem::GetCaptureData()
 {
-
-	//// 스트리밍 되고 있는 폭과 높이 값을 가져온다.
-	//int width = (int)cvGetCaptureProperty(m_CaptureSystem->GetCaptureData(), CV_CAP_PROP_FRAME_WIDTH);
-	//int height = (int)cvGetCaptureProperty(m_CaptureSystem->GetCaptureData(), CV_CAP_PROP_FRAME_HEIGHT);
-	//CvSize size = cvSize(width, height);
-	//
-	//IplImage* CaptureFrame = m_BufferManager->GetBuffer(BufferIDX::BUF_CAPTURE);
-	//InitFrameBuffer(CaptureFrame, size);
-	//CaptureFrame = cvQueryFrame(m_CaptureSystem->GetCaptureData());
-
-	cv::Mat* frame = m_BufferManager.get()->GetMat(MATIDX::MAT_CAPTURE);
-	bool ok = m_CaptureSystem.get()->GetCaptureData()->read(*frame);
-	m_TrackerModule->Initialize(m_CaptureSystem.get()->GetCaptureData());
+	m_CaptureSystem->GetCaptureData() >> m_BufferManager->GetMat(MATIDX::MAT_CAPTURE);
+	m_TrackerModule->Initialize(m_CaptureSystem->GetCaptureData());
 
 	
 }
 
 void CMainSystem::CalculateBuffer()
 {
+	m_CaptureSystem->GetCaptureData() >> m_BufferManager->GetMat(MATIDX::MAT_CAPTURE);
+	
+	m_BufferManager->GetMat(MATIDX::MAT_TEMP_FRAME) = m_BufferManager->GetMat(MATIDX::MAT_CAPTURE);
 
-	m_TrackerModule->TrackObject();
+	//Mat& TempF =	 m_BufferManager->GetMat(MATIDX::MAT_TEMP_FRAME);
+	//Mat& BKF =			m_BufferManager->GetMat(MATIDX::MAT_BACKGROUNDMASK);
+	//Mat& OUTF =			m_BufferManager->GetMat(MATIDX::MAT_OUT_FRAME);
+
+	m_TrackerModule->TrackObject(
+	m_BufferManager->GetMat(MATIDX::MAT_TEMP_FRAME),
+	m_BufferManager->GetMat(MATIDX::MAT_BACKGROUNDMASK),
+	m_BufferManager->GetMat(MATIDX::MAT_OUT_FRAME),
+	m_BufferManager->GetMat(MATIDX::MAT_RESULT)
+	);
 
 }
 
 void CMainSystem::RenderBuffer()
 {
-	if(m_BufferManager->GetMat(MATIDX::MAT_CAPTURE))
-		cv::imshow("Captured Image", *m_BufferManager->GetMat(MATIDX::MAT_CAPTURE));
+	cv::imshow("Captured Image", m_BufferManager->GetMat(MATIDX::MAT_CAPTURE));
+	cv::imshow("BackGroundMask", m_BufferManager->GetMat(MATIDX::MAT_BACKGROUNDMASK));
+	cv::imshow("Output", m_BufferManager->GetMat(MATIDX::MAT_OUT_FRAME));
+	cv::imshow("Track", m_BufferManager->GetMat(MATIDX::MAT_RESULT));
 }
 
 void CMainSystem::FrameAdvance()
 {
-	cv::Mat* frame = m_BufferManager.get()->GetMat(MATIDX::MAT_CAPTURE);
-	while (m_CaptureSystem->GetCaptureData()->read(*frame))
+	cv::Mat& frame = m_BufferManager->GetMat(MATIDX::MAT_CAPTURE);
+	while (m_CaptureSystem->GetCaptureData().read(frame))
 	{
 		CalculateBuffer();
 		RenderBuffer();

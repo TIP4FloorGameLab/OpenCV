@@ -21,7 +21,7 @@ void setLabel(Mat& image, vector<Point> contour, Point* center)
 	putText(image, tmp, Point(center->x - 20, center->y - 20), fontface, scale, CV_RGB(1, 0, 0), thickness, 8);
 }
 
-static void refineSegments(const Mat& img, Mat& mask, Mat& dst)
+static void refineSegments(const Mat& img, Mat& mask, Mat& dst, Mat& result)
 {
 	int niters = 3;
 
@@ -116,7 +116,7 @@ static void refineSegments(const Mat& img, Mat& mask, Mat& dst)
 
 		}
 	}
-	imshow("result", img_result);
+	result = img_result;
 
 }
 

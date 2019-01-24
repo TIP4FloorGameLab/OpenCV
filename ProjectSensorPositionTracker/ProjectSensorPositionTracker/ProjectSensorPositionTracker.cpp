@@ -5,11 +5,12 @@
 #include "MainSystem.h"
 #include "ProjectSensorPositionTracker.h"
 
-void main()
+int main()
 {
 	CMainSystem* mainSystem = new CMainSystem();
 
 	mainSystem->GetCaptureData();
 	mainSystem->FrameAdvance();
 
+	return 0;
 }

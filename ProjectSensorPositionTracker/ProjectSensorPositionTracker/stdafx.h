@@ -18,27 +18,39 @@
 #include <tchar.h>
 
 
+#include <opencv2/imgproc.hpp>
+#include <opencv2/videoio.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/video/background_segm.hpp>
+#include <opencv2/core.hpp>
 #include <opencv2/opencv.hpp>
-#include <opencv2/video/tracking.hpp>
-#include <tracking/include/opencv2/tracking/tracker.hpp>
 #include <opencv2/core/ocl.hpp>
-#include <opencv2/opencv.hpp>
 #include <opencv2/opencv_modules.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/objdetect/objdetect.hpp>
-#include <opencv2/highgui.hpp>
 
 #ifdef _DEBUG
 #pragma comment (lib, "opencv_world400d.lib")
-#pragma comment (lib, "opencv_tracking400d.lib")
 #else
 #pragma comment (lib, "opencv_world400.lib")
-#pragma comment (lib, "opencv_tracking400.lib")
 #endif
 
 // 여기서 프로그램에 필요한 추가 헤더를 참조합니다.
 
-//using namespace cv;
+using namespace cv;
+
+inline void setLabel(Mat& image, std::vector<Point> contour, Point* center)
+{
+	int fontface = FONT_HERSHEY_SIMPLEX;
+	double scale = 0.4;
+	int thickness = 1;
+
+	std::stringstream ss;
+	ss << center->x << ", " << center->y;
+	std::string tmp = ss.str();
+
+	putText(image, tmp, Point(center->x - 20, center->y - 20), fontface, scale, CV_RGB(1, 0, 0), thickness, 8);
+}
 
 enum class IPLIMAGEIDX
 {
@@ -47,5 +59,10 @@ enum class IPLIMAGEIDX
 
 enum class MATIDX
 {
-	MAT_CAPTURE
+	MAT_CAPTURE = 0,
+	MAT_TEMP_FRAME,
+	MAT_OUT_FRAME,
+	MAT_BACKGROUNDMASK,
+	MAT_RESULT,
+	COUNT
 };

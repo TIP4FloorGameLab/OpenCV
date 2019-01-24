@@ -15,8 +15,8 @@ public:
 	void RenderBuffer();
 	void FrameAdvance();
 private:
-	std::shared_ptr<CCaptureSystem> m_CaptureSystem;
-	std::shared_ptr<CBufferManager> m_BufferManager;
-	std::shared_ptr<CTrackerModule> m_TrackerModule;
+	CCaptureSystem* m_CaptureSystem;
+	CBufferManager* m_BufferManager;
+	CTrackerModule* m_TrackerModule;
 };
 
