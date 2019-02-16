@@ -102,7 +102,6 @@
 //		int numOfLables = connectedComponentsWithStats(img_gray, img_labels,
 //			stats, centroids, 8, CV_32S);
 //
-//		cout << centroids << endl;
 //
 //
 //
@@ -135,7 +134,6 @@
 //		imshow("segmented", out_frame);
 //		//imshow("Label", resizeLabel);
 //
-//		cout << "---------" << endl;
 //		if (waitKey(5) == 27) //ESC 
 //			break;
 //	}

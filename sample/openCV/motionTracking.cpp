@@ -121,7 +121,7 @@ int main() {
 	//capture.open(deviceID + apiID);
 	//
 	//---비디오로 할 때---
-		capture.open("../video/video.mp4");
+		capture.open("../video/MAH00572.mp4");
 	if (!capture.isOpened()) {
 		cout << "ERROR ACQUIRING VIDEO FEED\n";
 		return -1;

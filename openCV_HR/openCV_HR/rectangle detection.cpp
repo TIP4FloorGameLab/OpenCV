@@ -58,7 +58,7 @@
 //
 //		Mat img_temp;
 //		//그레이스케일 이미지로 변환  
-//		cvtColor(img_input, img_temp, COLOR_BGR2GRAY);
+//		cvtColor(img_input, img_temp, COLOR_BGR2HSV);
 //		GaussianBlur(img_temp, img_temp, Size(5, 5), 0, 0);
 //
 //
@@ -111,13 +111,16 @@
 //						
 //						//검출된 도형에 대한 라벨을 출력한다.
 //						setLabel(img_result, contours[i], &Point(cx, cy));
+//
+//						int rotatez = (approx[3].y - approx[1].y) / (approx[3].x - approx[1].x);
+//						//cout << "x" << "y" << "z"<<	z << endl;
 //					}
 //
 //					break;
 //
 //
 //
-//				deafult:
+//				default:
 //
 //					break;
 //				}
