@@ -22,16 +22,16 @@
     <Image Include="img.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\tracker_opencv(주석+수정)\code\main.cpp" />
-    <ClCompile Include="..\..\tracker_opencv(주석+수정)\code\tracker_opencv.cpp" />
     <ClCompile Include="Background Subtraction(MOG2.cpp" />
     <ClCompile Include="color detection.cpp" />
+    <ClCompile Include="DataWriter.cpp" />
     <ClCompile Include="merge.cpp" />
     <ClCompile Include="rectangle detection.cpp" />
     <ClCompile Include="threshold.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\tracker_opencv(주석+수정)\code\tracker_opencv.h" />
+    <ClInclude Include="DataWriter.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

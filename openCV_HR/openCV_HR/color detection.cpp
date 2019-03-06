@@ -1,11 +1,15 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
+#include "DataWriter.h"
 
 using namespace cv;
 using namespace std;
 
 int main()
 {
+
+	CDataWriter DataWriter;
+
 	int range_count = 0;
 
 	Scalar red(0, 0, 255);
@@ -84,8 +88,12 @@ int main()
 	}
 
 
+
+	
+
 	for (;;)
 	{
+
 		// wait for a new frame from camera and store it into 'frame'
 		cap.read(img_frame);
 
@@ -250,6 +258,9 @@ int main()
 		line(img_frame, Point(top_x, top), Point(bottom_x, bottom), Scalar(0, 255, 255), 10);
 		circle(img_frame, Point(x, y), 5, Scalar(255, 0, 0), 1);
 
+
+		DataWriter.Append(cap.get(CAP_PROP_POS_MSEC),x,y);
+
 		imshow("이진화 영상", img_mask1);
 		imshow("원본 영상", img_frame);
 
@@ -257,7 +268,7 @@ int main()
 		if (waitKey(5) >= 0)
 			break;
 	}
-
+	DataWriter.WriteDataToFile("data");
 
 	return 0;
 }
